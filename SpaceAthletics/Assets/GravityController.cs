@@ -11,6 +11,7 @@ public class GravityController : MonoBehaviour {
     Transform playerTransform;
     Transform planetTransform;
     public Vector3 normalVector;
+    bool connect  = false;
     //Vector3 playerPos;//プレイヤーの座標
     //Vector3 basePos;//惑星の座標
     
@@ -26,12 +27,16 @@ public class GravityController : MonoBehaviour {
 	// Update is called once per frame
 	void Update ()
     {
-        normalVector = GravityVector(planetTransform, planetTransform);
-	}
+        normalVector = GravityVector(playerTransform, planetTransform);
+        connect = true;
+    }
 
     private void FixedUpdate()
     {
-        GravityManager(normalVector);
+        if (connect == true)
+        {
+            GravityManager(normalVector);
+        }
     }
 
     public Vector3 GravityVector(Transform playerTransform,Transform planetTransform)
@@ -39,17 +44,19 @@ public class GravityController : MonoBehaviour {
         Vector3 playerPos = playerTransform.position;//引数のTransformから座標を入手
         Vector3 basePos = planetTransform.position;//〃
         Vector3 normalVector = basePos - playerPos;//法線ベクトルを計算
-        normalVector = normalVector.normalized;//算出した法線ベクトルを単位ベクトルに変換
-   
-        return normalVector;//戻り値として法線単位ベクトルを返す
+                                                   //normalVector = normalVector.normalized;//算出した法線ベクトルを単位ベクトルに変換
+
+        Debug.Log("GravityVector" + normalVector);
+        return normalVector;//戻り値として法線ベクトルを返す
     }
 
 
     private void GravityManager(Vector3 normalVector)
     {
-
-
+        Debug.Log("GravityManager" + normalVector);
         Vector3 gravityScaler = g * normalVector * (planetRigidbody.mass * playerRigidbody.mass) / (normalVector.sqrMagnitude);
+
+        //Debug.Log(normalVector.sqrMagnitude);
         playerRigidbody.AddForce(gravityScaler);
     }
 }
