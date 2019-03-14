@@ -19,8 +19,8 @@ public class CharacterForce : MonoBehaviour {
     Vector3 normalVector;//法線ベクトルのインスタンス
     Vector3 planeVector;//正面方向のベクトルのインスタンス
 
-    [SerializeField]
-    float power;//キャラに加える力
+    //[SerializeField]
+    //float power;//キャラに加える力
 
 	// Use this for initialization
 	void Start () {
@@ -47,7 +47,7 @@ public class CharacterForce : MonoBehaviour {
 
     private void CharacterMove(Vector3 planeVector)//キャラ移動（仮置き）
     {
-        playerRigidbody.AddForce(planeVector * power);
+        //playerRigidbody.AddForce(planeVector * power);
         //return playerTransform.position;
     }
 
