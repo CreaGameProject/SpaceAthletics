@@ -43,18 +43,16 @@ public class GravityController : MonoBehaviour {
     {
         Vector3 playerPos = playerTransform.position;//引数のTransformから座標を入手
         Vector3 basePos = planetTransform.position;//〃
-        Vector3 normalVector = basePos - playerPos;//法線ベクトルを計算
+        Vector3 normalVector = playerPos - basePos;//法線ベクトルを計算
                                                    //normalVector = normalVector.normalized;//算出した法線ベクトルを単位ベクトルに変換
 
-        Debug.Log("GravityVector" + normalVector);
         return normalVector;//戻り値として法線ベクトルを返す
     }
 
 
     private void GravityManager(Vector3 normalVector)
     {
-        Debug.Log("GravityManager" + normalVector);
-        Vector3 gravityScaler = g * normalVector * (planetRigidbody.mass * playerRigidbody.mass) / (normalVector.sqrMagnitude);
+        Vector3 gravityScaler = (-1) * g * normalVector * (planetRigidbody.mass * playerRigidbody.mass) / (normalVector.sqrMagnitude);
 
         //Debug.Log(normalVector.sqrMagnitude);
         playerRigidbody.AddForce(gravityScaler);

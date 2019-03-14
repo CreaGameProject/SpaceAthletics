@@ -10,12 +10,15 @@ public class CharacterForce : MonoBehaviour {
     GameObject plane;//正面ベクトル算出用のオブジェクト
     [SerializeField]
     GameObject planet;//惑星
+
     Rigidbody playerRigidbody;//キャラのRigidbodyのインスタンス
-    Transform playerTransform;//プレイヤーのTransformのインスタンス
+    Transform playerTransform;//キャラのTransformのインスタンス
     Transform planeTransform;//正面ベクトル算出用のTransform;
-    Vector3 playerPos;/*= new Vector3();*///キャラの座標
+    //Vector3 playerPos;/*= new Vector3();*///キャラの座標
+    GravityController gravityController = new GravityController();//GraivityControllerクラスのインスタンス生成
     Vector3 normalVector;//法線ベクトルのインスタンス
     Vector3 planeVector;//正面方向のベクトルのインスタンス
+
     [SerializeField]
     float power;//キャラに加える力
 
@@ -23,36 +26,35 @@ public class CharacterForce : MonoBehaviour {
 	void Start () {
         playerRigidbody = player.GetComponent<Rigidbody>();//インスタンス格納
         playerTransform = player.transform;//〃
-        normalVector = planet.GetComponent<GravityController>().normalVector;
         planeTransform = plane.GetComponent<Transform>();
+        gravityController = planet.GetComponent<GravityController>();
 	}
 	
 	// Update is called once per frame
 	void Update () {
-        //playerPos = CharacterMove();
-        CharacterStandingManager(normalVector);
+        normalVector = gravityController.normalVector;
+        planeVector = PlayerPlaneVector(planeTransform,playerTransform);
+        //CharacterMove(planeVector);
+        CharacterStandingManager(planeVector,normalVector,playerTransform);
+        //Debug.Log(planeTransform.position);
 	}
 
-    public Vector3 PlayerPlaneVector()//キャラクターの正面ベクトルを求める
+    public Vector3 PlayerPlaneVector(Transform planeTransform,Transform playerTranform)//キャラクターの正面ベクトルを求める
     {
-        Vector3 planeObjectoVector = planeTransform.position;
-
+        planeVector = planeTransform.position - playerTransform.position;
         return planeVector;
     }
 
-    private Vector3 CharacterMove()//キャラ移動（仮置き）
+    private void CharacterMove(Vector3 planeVector)//キャラ移動（仮置き）
     {
-        Vector3 Movement = new Vector3(0,0,1);
-        playerRigidbody.AddForce(Movement * power);
-
-        return playerTransform.position;
+        playerRigidbody.AddForce(planeVector * power);
+        //return playerTransform.position;
     }
 
-    private void CharacterStandingManager(Vector3 normalVector)//姿勢制御
+    private void CharacterStandingManager(Vector3 planeVector,Vector3 normalVector,Transform playerTransform)//姿勢制御
     {
-        
-
-
+        playerTransform.rotation = Quaternion.LookRotation(planeVector,normalVector);
+        Debug.Log("planeVectorは" + planeVector + "，normalVectorは" + this.normalVector);
+        //return Quaternion.LookRotation(planeVector, normalVector);
     }
-
 }
