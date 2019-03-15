@@ -23,10 +23,10 @@ public class camera : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
-        if (Input.GetKey(KeyCode.D))
+        /*if (Input.GetKey(KeyCode.D))
         {
             transform.parent.Translate(0.1f,0,0); 
-        }
+        }*/
 
         if (Input.GetKey(KeyCode.RightArrow))
         {
