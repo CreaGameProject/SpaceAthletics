@@ -589,6 +589,7 @@ MonoBehaviour:
   player: {fileID: 1609509487}
   plane: {fileID: 36940077}
   planet: {fileID: 1859039266}
+  power: 100
 --- !u!4 &1609509492 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 400326, guid: 8f0565f23a2b58541a475bd3c1393052,

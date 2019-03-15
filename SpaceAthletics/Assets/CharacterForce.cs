@@ -10,6 +10,8 @@ public class CharacterForce : MonoBehaviour {
     GameObject plane;//正面ベクトル算出用のオブジェクト
     [SerializeField]
     GameObject planet;//惑星
+    [SerializeField]
+    float power;
 
     Rigidbody playerRigidbody;//キャラのRigidbodyのインスタンス
     Transform playerTransform;//キャラのTransformのインスタンス
@@ -29,15 +31,19 @@ public class CharacterForce : MonoBehaviour {
         planeTransform = plane.GetComponent<Transform>();
         gravityController = planet.GetComponent<GravityController>();
 	}
-	
-	// Update is called once per frame
-	void Update () {
+
+    // Update is called once per frame
+    void Update()
+    {
         normalVector = gravityController.normalVector;
-        planeVector = PlayerPlaneVector(planeTransform,playerTransform);
-        //CharacterMove(planeVector);
-        CharacterStandingManager(planeVector,normalVector,playerTransform);
+        planeVector = PlayerPlaneVector(planeTransform, playerTransform);
+        CharacterStandingManager(planeVector, normalVector, playerTransform);
         //Debug.Log(planeTransform.position);
-	}
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            CharacterMove(planeVector);
+        }
+    }
 
     public Vector3 PlayerPlaneVector(Transform planeTransform,Transform playerTranform)//キャラクターの正面ベクトルを求める
     {
@@ -47,8 +53,7 @@ public class CharacterForce : MonoBehaviour {
 
     private void CharacterMove(Vector3 planeVector)//キャラ移動（仮置き）
     {
-        //playerRigidbody.AddForce(planeVector * power);
-        //return playerTransform.position;
+        playerRigidbody.AddForce(planeVector * power);
     }
 
     private void CharacterStandingManager(Vector3 planeVector,Vector3 normalVector,Transform playerTransform)//姿勢制御
