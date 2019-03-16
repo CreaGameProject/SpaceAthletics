@@ -38,7 +38,7 @@ public class CharacterForce : MonoBehaviour {
         normalVector = gravityController.normalVector;
         planeVector = PlayerPlaneVector(planeTransform, playerTransform);
         CharacterStandingManager(planeVector, normalVector, playerTransform);
-        //Debug.Log(planeTransform.position);
+
         if (Input.GetKeyDown(KeyCode.Space))
         {
             CharacterMove(planeVector);
