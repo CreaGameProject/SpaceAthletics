@@ -50,11 +50,17 @@ public class GravityController : MonoBehaviour {
     }
 
 
-    private void GravityManager(Vector3 normalVector)
+    private void GravityManager(Vector3 normalVector)//重力をかけるメソッド
     {
         Vector3 gravityScaler = (-1) * g * normalVector * (planetRigidbody.mass * playerRigidbody.mass) / (normalVector.sqrMagnitude);
 
         //Debug.Log(normalVector.sqrMagnitude);
         playerRigidbody.AddForce(gravityScaler);
     }
+
+    private void SpaceSpeedManager()
+    {
+        //float v= 
+    }
+
 }
