@@ -43,7 +43,7 @@ public class CharacterForce : MonoBehaviour {
         normalVector = gravityController.normalVector;//移動後の法線ベクトルを取得
         planeVector = CharacterStandingManager(planeVector, normalVector);//姿勢制御後の正面ベクトルを代入
         InputManager();//コントローラーの入力を取る
-        planeVector = CharacterDirection();//キャラの向きを更新した後の正面ベクトルを代入
+        //planeVector = CharacterDirection();//キャラの向きを更新した後の正面ベクトルを代入
         CharacterMove(planeVector);//正面ベクトルの方向に力をかけてキャラを移動
     }
 
