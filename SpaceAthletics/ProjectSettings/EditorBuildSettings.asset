@@ -8,4 +8,22 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/SampleScene.unity
     guid: 99c9720ab356a0642a771bea13969a05
+  - enabled: 1
+    path: Assets/Scenes/IshiTest.unity
+    guid: 66ca161f052f0174baa69a46e72b719d
+  - enabled: 1
+    path: Assets/Scenes/StartScene.unity
+    guid: 3236b85988654744f81484b3290dcdba
+  - enabled: 1
+    path: Assets/Scenes/PoseScene.unity
+    guid: a518cc7a1951236449a52165dcfdf7b9
+  - enabled: 1
+    path: Assets/Scenes/MainScene.unity
+    guid: 88f05338b99e0b844a6b34e91508f03e
+  - enabled: 1
+    path: Assets/Scenes/ScoreScene.unity
+    guid: b0a7c1d93130b44449774e95e4fa1808
+  - enabled: 1
+    path: Assets/Scenes/EndScene.unity
+    guid: b8ed14a5a3923434694857f7d6756297
   m_configObjects: {}
