@@ -348,7 +348,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: d141291d7a3bd144e86fce80abf03204, type: 3}
       propertyPath: m_RootOrder
-      value: 3
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: d141291d7a3bd144e86fce80abf03204, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -473,13 +473,13 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 534669902}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 20, z: -5}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 2, z: -6}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1116456239}
-  m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_Father: {fileID: 1609509492}
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!45 &534669906
 Skybox:
@@ -504,8 +504,9 @@ MonoBehaviour:
   planet: {fileID: 218008847}
   cameraMaxDistance: 8
   cameraMinDistance: 3
-  cameraMajorDistance: 5
-  rotateSpeed: 0
+  rotateSpeed: 0.1
+  zoomSpeed: 0.1
+  inputHorizontal: 0
 --- !u!1001 &692099082
 Prefab:
   m_ObjectHideFlags: 0
@@ -543,7 +544,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4094606820796738, guid: b629785527fa64d4a9854349bd7b3fff, type: 2}
       propertyPath: m_RootOrder
-      value: 4
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 4094606820796738, guid: b629785527fa64d4a9854349bd7b3fff, type: 2}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -611,11 +612,11 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1274480643}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 18, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1274480645
 MonoBehaviour:
@@ -665,7 +666,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 400326, guid: 8f0565f23a2b58541a475bd3c1393052, type: 3}
       propertyPath: m_RootOrder
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 13700006, guid: 8f0565f23a2b58541a475bd3c1393052, type: 3}
       propertyPath: m_AABB.m_Center.y

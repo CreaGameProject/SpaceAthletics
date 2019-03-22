@@ -26,6 +26,8 @@ public class CharacterForce : MonoBehaviour {
     float jumpPower;//ジャンプの高さ
     float inputVertical;//コントローラーの前後方向の入力
     float inputHorizontal;//コントローラーの左右方向の入力
+
+    float inputHorizontal2;
     private Animator animator;
     bool goSign;//キャラを動かすかどうかの判定用
     bool jumpingFlag = true;//キャラのジャンプ判定
@@ -36,6 +38,7 @@ public class CharacterForce : MonoBehaviour {
         gravityController = planet.GetComponent<GravityController>();
         planeVector = plane.transform.position - transform.position;//正面ベクトルを仮代入
         animator = GetComponent<Animator>();
+        
     }
 
     // Update is called once per frame
@@ -43,8 +46,11 @@ public class CharacterForce : MonoBehaviour {
         normalVector = gravityController.normalVector;//移動後の法線ベクトルを取得
         planeVector = CharacterStandingManager(planeVector, normalVector);//姿勢制御後の正面ベクトルを代入
         InputManager();//コントローラーの入力を取る
-        //planeVector = CharacterDirection();//キャラの向きを更新した後の正面ベクトルを代入
+        planeVector = CharacterDirection();//キャラの向きを更新した後の正面ベクトルを代入
         CharacterMove(planeVector);//正面ベクトルの方向に力をかけてキャラを移動
+
+        inputHorizontal2 = GameObject.Find("Main Camera").GetComponent<CameraMove>().inputHorizontal;
+        Debug.Log("inputHorizontalは" + inputHorizontal + ",inputHorizontal2は" + inputHorizontal2);
     }
 
     private void FixedUpdate()
