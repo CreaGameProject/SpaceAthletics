@@ -24,6 +24,7 @@ public class CharacterForce : MonoBehaviour {
     float highSpeed;//ダッシュ移動
     [SerializeField]
     float jumpPower;//ジャンプの高さ
+    [SerializeField]
     float inputVertical;//コントローラーの前後方向の入力
     float inputHorizontal;//コントローラーの左右方向の入力
 
@@ -49,8 +50,8 @@ public class CharacterForce : MonoBehaviour {
         planeVector = CharacterDirection();//キャラの向きを更新した後の正面ベクトルを代入
         CharacterMove(planeVector);//正面ベクトルの方向に力をかけてキャラを移動
 
-        inputHorizontal2 = GameObject.Find("Main Camera").GetComponent<CameraMove>().inputHorizontal;
-        Debug.Log("inputHorizontalは" + inputHorizontal + ",inputHorizontal2は" + inputHorizontal2);
+        //inputHorizontal2 = GameObject.Find("Main Camera").GetComponent<CameraMove>().inputHorizontal;
+        //Debug.Log("inputHorizontalは" + inputHorizontal + ",inputHorizontal2は" + inputHorizontal2);
     }
 
     private void FixedUpdate()
@@ -116,5 +117,13 @@ public class CharacterForce : MonoBehaviour {
         {
             runSpeed = lowSpeed;//通常
         }
+
+        //if (inputHorizontal != 0 && inputVertical != 0)
+        //{
+        //    if (playerRigidbody.velocity.magnitude >= lowSpeed)
+        //    {
+        //        playerRigidbody.velocity = playerRigidbody.velocity.normalized * lowSpeed;
+        //    }
+        //}
     }
 }

@@ -9,18 +9,18 @@ public class CameraMove : MonoBehaviour {
     GameObject planet;
 
     [SerializeField]
-    float cameraMaxDistance;//最大距離
+    float cameraMinDistance;//カメラとプレイヤーの最大距離
     [SerializeField]
-    float cameraMinDistance;//最小距離
-    float cameraDistance;//カメラの距離
-    float cameraAngle;//カメラの角度
+    float cameraMaxDistance;//カメラとプレイヤーの最小距離
     [SerializeField]
-    float rotateSpeed;
+    float cameraDistance = 5;//カメラの距離
     [SerializeField]
-    float zoomSpeed;
-
-    public float inputHorizontal;
-    float inputVertical;
+    float distanceAngle;
+    float cameraAngle = 0;//カメラのアングル
+    [SerializeField]
+    float zoomSpeed;//ズームする際のカメラのスピード
+    [SerializeField]
+    float cameraSpeed;//横移動する際のカメラのスピード
 
     float inputHorizontal2;
     float inputVertical2;
@@ -31,45 +31,54 @@ public class CameraMove : MonoBehaviour {
 
     // Use this for initialization
     void Start() {
-        //cameraDistance = 3;
-        normalVector = planet.GetComponent<GravityController>().normalVector;
-        planeVector = player.GetComponent<CharacterForce>().planeVector;
-        
    
     }
 
     // Update is called once per frame
     void Update() {
-        cameraDistance = CharacterCameraDistance();
         ControllerManager();
         CameraMoving();
-
-    }
-
-    private float CharacterCameraDistance()//キャラクターとカメラの間の距離を算出
-    {
-        cameraPlaneVector = player.transform.position - transform.position;
-        cameraDistance = cameraPlaneVector.magnitude;
-
-        return cameraDistance;
     }
 
     private void ControllerManager()//コントローラーの入力を取る
     {
-        inputHorizontal = Input.GetAxis("Horizontal2");
-        inputVertical = Input.GetAxis("Vertical2");
+        inputHorizontal2 = Input.GetAxis("Horizontal2");
+        inputVertical2 = Input.GetAxis("Vertical2");
     }
 
-    private void CameraMoving()//カメラの移動，座標更新，向きの転換を実施
+    private void CameraMoving()
     {
-        if (inputHorizontal != 0)//横方向の入力有
+        if (inputHorizontal2 > 0)
         {
-            cameraAngle += rotateSpeed;
+            cameraAngle += cameraSpeed;
+            Debug.Log(cameraAngle);
+        }
+        else if (inputHorizontal2 < 0)
+        {
+            cameraAngle -= cameraSpeed;
         }
 
-        if (inputVertical != 0)//縦方向の入力有
+        if (inputVertical2 < 0)
+        {
+            cameraDistance += zoomSpeed;
+        }
+        else if (inputVertical2 > 0)
         {
             cameraDistance -= zoomSpeed;
+        }
+
+        CameraTrans();
+    }
+
+    private void CameraTrans()
+    {
+        if (cameraAngle >= 360)
+        {
+            cameraAngle = 0;
+        }
+        else if (cameraAngle < 0)
+        {
+            cameraAngle += 360;
         }
 
         if (cameraDistance > cameraMaxDistance)
@@ -81,7 +90,8 @@ public class CameraMove : MonoBehaviour {
             cameraDistance = cameraMinDistance;
         }
 
-        transform.localPosition = new Vector3(Mathf.Sin(cameraAngle) * cameraDistance, Mathf.Sin(cameraAngle / 180 * Mathf.PI) * cameraDistance, Mathf.Cos(cameraAngle) * -cameraDistance);
-        transform.LookAt(transform.parent);
+        transform.localPosition = new Vector3(Mathf.Sin(cameraAngle / 180 * Mathf.PI) * cameraDistance, /*Mathf.Cos(cameraAngle / 180 * Mathf.PI) * cameraDistance */ 3,cameraDistance );
+
+        transform.rotation = Quaternion.LookRotation(transform.parent.position - transform.position, (transform.parent.position - planet.transform.position) * 10);
     }
 }
